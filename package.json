@@ -1,6 +1,6 @@
 {
   "name": "express-except",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Skip middleware when a path matches",
   "main": "index.js",
   "repository": "https://github.com/mhassan1/express-except",
