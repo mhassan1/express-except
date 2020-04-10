@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.2] - 2020-04-10
+[1.0.2]: https://github.com/mhassan1/express-except/compare/v1.0.1...v1.0.2
+
+- Add `@ava/babel` for `ava@3`
+
 ## [1.0.1] - 2020-04-10
 [1.0.1]: https://github.com/mhassan1/express-except/compare/v1.0.0...v1.0.1
 
