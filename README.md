@@ -45,5 +45,11 @@ to match routes manually.
 * `path` - An Express path that should be skipped over. If the path of the request matches, the passed `middleware` will be skipped. Supports any of [Express Path Examples](https://expressjs.com/en/api.html#path-examples).
 * `middleware` - An Express callback or router, an array of callbacks and/or routers, or a mix of these
 
+## Development
+```bash
+yarn
+yarn test
+```
+
 ## License
 MIT
