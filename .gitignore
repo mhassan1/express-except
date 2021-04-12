@@ -112,3 +112,9 @@ dist
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+
+index.js
+index.d.ts
+
+test/express-except.test.d.ts
+test/express-except.test.js

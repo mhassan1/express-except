@@ -3,6 +3,7 @@
 ## [1.1.0] - 2021-04-12
 [1.1.0]: https://github.com/mhassan1/express-except/compare/v1.0.2...v1.1.0
 
+- Move to TypeScript
 - Move to Yarn Berry
 
 ## [1.0.2] - 2020-04-10
