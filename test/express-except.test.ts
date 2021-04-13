@@ -1,12 +1,12 @@
 import test from 'ava'
-import express, { Router } from 'express'
+import express, { Router, Request, Response, NextFunction } from 'express'
 import got from 'got'
 import '..'
 
-const stopRouter = new Router()
-const noOpMiddleware = (req, res, next) => next()
-const fallbackMiddleware = (req, res) => res.send('skipped')
-const stopMiddleware = (req, res) => res.send('stopped')
+const stopRouter = Router()
+const noOpMiddleware = (req: Request, res: Response, next: NextFunction) => next()
+const fallbackMiddleware = (req: Request, res: Response) => res.send('skipped')
+const stopMiddleware = (req: Request, res: Response) => res.send('stopped')
 stopRouter.use(stopMiddleware)
 
 // === app
@@ -75,7 +75,7 @@ test('app case sensitive routing', async (t) => {
 
 test('router.useExcept', async (t) => {
   const app = express()
-  const router = new Router()
+  const router = Router()
   router.useExcept('/skip', stopMiddleware)
   app.use('/root', router)
   app.use(fallbackMiddleware)
@@ -88,7 +88,7 @@ test('router.useExcept', async (t) => {
 
 test('router.allExcept', async (t) => {
   const app = express()
-  const router = new Router()
+  const router = Router()
   router.allExcept('/skip', stopMiddleware)
   app.use('/root', router)
   app.use(fallbackMiddleware)
@@ -101,7 +101,7 @@ test('router.allExcept', async (t) => {
 
 test('router.getExcept', async (t) => {
   const app = express()
-  const router = new Router()
+  const router = Router()
   router.getExcept('/skip', stopMiddleware)
   app.use('/root', router)
   app.use(fallbackMiddleware)
@@ -114,7 +114,7 @@ test('router.getExcept', async (t) => {
 
 test('router strict routing', async (t) => {
   const app = express()
-  const router = new Router({
+  const router = Router({
     strict: true
   })
   router.useExcept('/skip/', stopMiddleware)
@@ -130,7 +130,7 @@ test('router strict routing', async (t) => {
 
 test('router case sensitive routing', async (t) => {
   const app = express()
-  const router = new Router({
+  const router = Router({
     caseSensitive: true
   })
   router.useExcept('/SKIP', stopMiddleware)

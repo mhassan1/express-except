@@ -48,6 +48,7 @@ to match routes manually.
 ## Development
 ```bash
 yarn
+yarn build
 yarn test
 ```
 
