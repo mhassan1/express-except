@@ -1,6 +1,6 @@
 {
   "name": "express-except",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Skip middleware when a path matches",
   "main": "index.js",
   "typings": "types.d.ts",
