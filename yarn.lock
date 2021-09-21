@@ -5255,9 +5255,9 @@ fsevents@~2.3.1:
   linkType: hard
 
 "trim-off-newlines@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "trim-off-newlines@npm:1.0.1"
-  checksum: c590b9e8c1d91ac1b57b65f8ed7cc7837e702d86f47c725462cc7e03f3850dfa92a32f956d350632208aa78e9be03917a21d9ef5d139c30be13bb51bf576209f
+  version: 1.0.2
+  resolution: "trim-off-newlines@npm:1.0.2"
+  checksum: 859edd8f1d7340f9b7d4ad44e0793774620c31cc0fb92761e5993c2d3438d0261d3f949d76ad952373354bc63b60c5995560e099bb2515243f55b0a948d8147f
   languageName: node
   linkType: hard
 
