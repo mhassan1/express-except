@@ -3,4 +3,8 @@ node_js:
   - lts/*
   - node
 os: linux
+dist: focal
 arch: arm64
+cache:
+  directories:
+    - .yarn/cache
