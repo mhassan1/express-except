@@ -7,6 +7,8 @@ const stopRouter = Router()
 const noOpMiddleware = (req: Request, res: Response, next: NextFunction) => next()
 const fallbackMiddleware = (req: Request, res: Response) => res.send('skipped')
 const stopMiddleware = (req: Request, res: Response) => res.send('stopped')
+const asyncErrorMiddleware = async (_req: Request, _res: Response) => { throw new Error('oops') }
+const errorHandlingMiddleware = (err: Error, req: Request, res: Response, _next: NextFunction) => res.send('errored')
 stopRouter.use(stopMiddleware)
 
 // === app
@@ -167,4 +169,16 @@ test('anonymous middleware', async (t) => {
   t.is((await got('http://localhost:3051/root/other')).body, 'stopped')
   t.is((await got('http://localhost:3051/root/skip')).body, 'skipped')
   t.is((await got('http://localhost:3051/root/skip/more')).body, 'skipped')
+})
+
+test('async error middleware', async (t) => {
+  const app = express()
+  app.useExcept('/root/skip', asyncErrorMiddleware)
+  app.use(fallbackMiddleware)
+  app.use(errorHandlingMiddleware)
+  app.listen(3052)
+
+  t.is((await got('http://localhost:3052/root/other')).body, 'errored')
+  t.is((await got('http://localhost:3052/root/skip')).body, 'skipped')
+  t.is((await got('http://localhost:3052/root/skip/more')).body, 'skipped')
 })
