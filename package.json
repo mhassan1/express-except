@@ -1,6 +1,6 @@
 {
   "name": "express-except",
-  "version": "1.1.1",
+  "version": "2.0.0",
   "description": "Skip middleware when a path matches",
   "main": "index.js",
   "typings": "types.d.ts",
@@ -8,7 +8,7 @@
   "author": "mhassan1",
   "license": "MIT",
   "engines": {
-    "node": ">=10"
+    "node": ">=18"
   },
   "files": [
     "index.js",
@@ -22,10 +22,11 @@
   },
   "dependencies": {
     "array-flatten": "^3.0.0",
-    "methods": "^1.1.2"
+    "methods": "^1.1.2",
+    "router": "^2.0.0"
   },
   "peerDependencies": {
-    "express": "^4.17.1"
+    "express": "^5.0.0"
   },
   "devDependencies": {
     "@ava/typescript": "^4.1.0",
@@ -35,7 +36,7 @@
     "@typescript-eslint/parser": "^5.61.0",
     "ava": "^5.3.1",
     "eslint": "^8.44.0",
-    "express": "^4.19.2",
+    "express": "^5.0.0",
     "got": "^11.8.6",
     "typescript": "~5.1.6"
   },

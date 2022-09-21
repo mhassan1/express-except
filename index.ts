@@ -4,10 +4,7 @@
 import app = require('express/lib/application')
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import Layer = require('express/lib/router/layer')
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import router = require('express/lib/router')
+import Layer = require('router/lib/layer')
 
 import { flatten } from 'array-flatten'
 import methods from 'methods'
@@ -39,24 +36,28 @@ const handler = (fn: string, getLayerOpts: () => LayerOptions) => function(this:
     }
     const layer = new Layer(path, layerOpts, noOp)
     if (layer.match(req.path)) return next()
-    _middleware(req, res, next)
+    return _middleware(req, res, next)
   })
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const thisFn: (path: PathParams, ...middleware: RequestHandler[]) => void = this[fn].bind(this)
-  return thisFn(fn !== 'use' ? '*' : '/', modifiedMiddleware)
+  return thisFn(fn !== 'use' ? /.*/ : '/', modifiedMiddleware)
 }
 
 for (const fn of ['use', 'all'].concat(methods)) {
   app[`${fn}Except`] = handler(fn, function(this: Application) {
     return {
-      sensitive: this._router.caseSensitive,
-      strict: this._router.strict
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      sensitive: this.router.caseSensitive,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      strict: this.router.strict
     }
   })
 
-  router[`${fn}Except`] = handler(fn, function(this: Router) {
+  ExpressRouter.prototype[`${fn}Except`] = handler(fn, function(this: Router) {
     return {
       sensitive: this.caseSensitive,
       strict: this.strict
