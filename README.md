@@ -1,6 +1,8 @@
 # express-except
 Skip middleware when a path matches
 
+This package works with Express v5. For Express v4 support, use `express-except@1`.
+
 ## Install
 `npm install express-except`
 
