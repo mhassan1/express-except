@@ -1,9 +1,11 @@
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 import app = require('express/lib/application')
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 import Layer = require('router/lib/layer')
 
 import { flatten } from 'array-flatten'
@@ -25,7 +27,6 @@ type LayerOptions = {
   strict?: boolean
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
 const noOp = () => {}
 
 const handler = (fn: string, getLayerOpts: () => LayerOptions) => function(this: Application | Router, path: PathParams, ...middleware: RequestHandler[]): void {
