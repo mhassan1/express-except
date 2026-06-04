@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.0.0] - 2023-09-11
+## [2.0.0] - 2024-09-11
 [2.0.0]: https://github.com/mhassan1/express-except/compare/v1.1.1...v2.0.0
 
 ### BREAKING CHANGES
