@@ -210,3 +210,26 @@ test('async error middleware', async (t) => {
 
   server.close()
 })
+
+for (const target of ['app', 'router'] as const) {
+  test(`${target}.useExcept preserves middleware names`, (t) => {
+    const app = express()
+    const router = Router()
+    const middleware: RequestHandler[] = [
+      function namedMiddleware(_req, _res, next) { next() },
+      noOpMiddleware,
+      (_req, _res, next) => { next() }
+    ]
+
+    if (target === 'app') app.useExcept('/skip', middleware)
+    else router.useExcept('/skip', middleware)
+
+    const stack = target === 'app' ? app.router.stack : router.stack
+    t.is(stack.length, middleware.length)
+    middleware.forEach((original, index) => {
+      t.not(stack[index].handle, original)
+      t.is(stack[index].handle.name, original.name)
+      t.is(stack[index].name, original.name || '<anonymous>')
+    })
+  })
+}

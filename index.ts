@@ -30,14 +30,18 @@ type LayerOptions = {
 const noOp = () => {}
 
 const handler = (fn: string, getLayerOpts: () => LayerOptions) => function(this: Application | Router, path: PathParams, ...middleware: RequestHandler[]): void {
-  const modifiedMiddleware = flatten(middleware).map((_middleware: ExpressRequestHandler) => (req: Request, res: Response, next: NextFunction) => {
-    const layerOpts = {
-      ...getLayerOpts.call(this),
-      end: fn !== 'use',
+  const modifiedMiddleware = flatten(middleware).map((_middleware: ExpressRequestHandler) => {
+    const wrappedMiddleware = (req: Request, res: Response, next: NextFunction) => {
+      const layerOpts = {
+        ...getLayerOpts.call(this),
+        end: fn !== 'use',
+      }
+      const layer = new Layer(path, layerOpts, noOp)
+      if (layer.match(req.path)) return next()
+      return _middleware(req, res, next)
     }
-    const layer = new Layer(path, layerOpts, noOp)
-    if (layer.match(req.path)) return next()
-    return _middleware(req, res, next)
+    Object.defineProperty(wrappedMiddleware, 'name', { value: _middleware.name, configurable: true })
+    return wrappedMiddleware
   })
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
